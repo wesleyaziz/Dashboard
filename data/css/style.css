@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 :root {
-  --font-family: Josefin Sans, sans-serif;
+  --dashboard-circle-radius: 80px;
+  --dashboard-circle-circumference: calc( 2 * 3.14159 * var(--dashboard-circle-radius) );
+  --dashboard-circle-progress: 0.3;
 }
 
 * {
@@ -295,8 +297,8 @@ aside .icon.active {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 160px;
-  height: 160px;
+  width: calc(var(--dashboard-circle-radius) * 2);
+  height: calc(var(--dashboard-circle-radius) * 2);
   margin-top: 20px;
   border-radius: 50%;
   background-color: #e3edf7;
@@ -307,8 +309,8 @@ aside .icon.active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 120px;
-  height: 120px;
+  width: calc(var(--dashboard-circle-radius) * 2 - 40px);
+  height: calc(var(--dashboard-circle-radius) * 2 - 40px);
   border-radius: 50%;
   background-color: #e3edf7;
   box-shadow: inset 4px 4px 8px -1px rgba(0, 0, 0, 0.1), inset -4px -4px 8px -1px rgba(255, 255, 255, 0.7), inset -2px -2px 4px -1px rgba(255, 255, 255, 0.7), 0 12px 10px -10px rgba(0, 0, 0, 0.1);
@@ -320,7 +322,7 @@ aside .icon.active {
   font-size: 1.2rem;
   font-weight: bold;
 }
-.content .sidebar .analytics .dashboard .outer .inner .text {
+.content .sidebar .analytics .dashboard .outer .inner .desc {
   font-size: 0.8rem;
 }
 .content .sidebar .analytics .dashboard svg {
@@ -332,13 +334,19 @@ aside .icon.active {
   margin-top: 20px;
 }
 .content .sidebar .analytics .dashboard svg circle {
+  cx: calc(var(--dashboard-circle-radius));
+  cy: calc(var(--dashboard-circle-radius));
+  r: calc(var(--dashboard-circle-radius) - 10px);
   fill: none;
   stroke: url(#GradientColor);
   stroke-linecap: round;
   stroke-width: 20px;
-  stroke-dasharray: 472px;
-  stroke-dashoffset: 472px;
+  stroke-dasharray: calc(6.28318 * var(--dashboard-circle-radius));
+  stroke-dashoffset: calc(6.28318 * var(--dashboard-circle-radius));
   animation: animate 2s linear forwards;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  transition: stroke-dashoffset 0.3s ease;
 }
 .content .sidebar .news {
   border: 2px solid #fff;
@@ -382,9 +390,9 @@ aside .icon.active {
 }
 @keyframes animate {
   from {
-    stroke-dashoffset: 472px;
+    stroke-dashoffset: var(--dashboard-circle-circumference);
   }
   to {
-    stroke-dashoffset: 200px;
+    stroke-dashoffset: calc(var(--dashboard-circle-circumference) * (1 - var(--dashboard-circle-progress)));
   }
 }

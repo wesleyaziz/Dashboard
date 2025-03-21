@@ -77,4 +77,32 @@ document.addEventListener('DOMContentLoaded',function(){
   const chart = new ApexCharts(grid, options)
   
   chart.render()  
+
+  // === dashboard circle ===
+  const root = document.documentElement
+  const dashboardData= [
+    {
+      percent: 72,
+      
+    }
+  ]
+  function getDashboardCircleValue(){
+    const radius = getComputedStyle(root).getPropertyValue('--dashboard-circle-radius')
+    const circumference = getComputedStyle(root).getPropertyValue('--dashboard-circle-circumference')
+    const progress = getComputedStyle(root).getPropertyValue('--dashboard-circle-progress')
+    return {radius, circumference, progress}
+  }
+  
+  function setDashboardCircleValue(radius, progress){
+    root.style.setProperty('--dashboard-circle-radius', `${radius}px`)
+    root.style.setProperty('--dashboard-circle-circumference', `${2 * Math.PI * radius}px`)
+    root.style.setProperty('--dashboard-circle-progress', progress)
+  }
+
+  function updateProgress(percent){
+    const progress = percent / 100
+    setDashboardCircleValue(80, progress)
+  }
+
+  updateProgress(72)
 })

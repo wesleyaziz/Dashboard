@@ -1,0 +1,74 @@
+// mixins
+@mixin btnEffect
+  cursor: pointer
+  transition: 0.3s transform ease
+  &:active
+    transform: scale(0.9)
+
+@mixin bgBlurEffect
+  border: 2px solid #fff
+  border-radius: 40px
+  background: rgba(255, 255, 255, 0.3)
+  backdrop-filter: blur(5px)
+
+@mixin iconSet
+  @include btnEffect
+  position: relative
+  color: $color-label
+  &.active
+    color: $color-primary
+
+@mixin flexCenter($direction: row)
+  display: flex
+  flex-direction: $direction
+  align-items: center
+  justify-content: center
+
+@mixin absoluteCenter
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+@mixin circleProgress($radius: 80px)
+  .outer
+    @include absoluteCenter
+    @include flexCenter
+    width: calc( $radius * 2 )
+    height: calc( $radius * 2 )
+    margin-top: $union-gap
+    border-radius: 50%
+    background-color: #e3edf7
+    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.1),-6px -6px 10px -1px rgba(255, 255, 255, 0.7)
+    .inner
+      @include flexCenter(column)
+      width: calc( ($radius*2) - 40px )
+      height: calc( ($radius*2) - 40px )
+      border-radius: 50%
+      background-color: #e3edf7
+      box-shadow: inset 4px 4px 8px -1px rgba(#000,0.1),inset -4px -4px 8px -1px rgba(#fff,0.7),inset -2px -2px 4px -1px rgba(#fff,0.7),0 12px 10px -10px rgba(#000,0.1)
+      .num,.text
+        text-shadow: 2px 2px 4px rgba(#000,0.1),-2px -2px 4px rgba(#fff,0.7)
+      .num
+        font-size: 1.2rem
+        font-weight: bold
+      .desc
+        font-size: 0.8rem
+  svg
+    @include absoluteCenter
+    z-index: 1
+    margin-top: $union-gap
+    circle
+      cx: calc( $radius )
+      cy: calc( $radius )
+      r: calc( $radius - 10px )
+      fill: none
+      stroke: url(#GradientColor)
+      stroke-linecap: round
+      stroke-width: 20px
+      stroke-dasharray: calc( 2 * 3.14159 * $radius )
+      stroke-dashoffset: calc( 2 * 3.14159 * $radius )
+      animation: animate 2s linear forwards
+      transform-origin: center
+      transform: rotate(-90deg)
+      transition: stroke-dashoffset 0.3s ease

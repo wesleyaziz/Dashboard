@@ -1,87 +1,8 @@
 // import
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap')
+@import './mixins'
+@import './variables'
 
-// SASS variables
-$font-family: "Josefin Sans", sans-serif
-$union-gap: 20px
-$color-primary: #64889a
-$color-label: #555
-$color-label-light: #fff
-$nav-height: 50px
-$container-padding: 20px
-
-// CSS variables
-:root
-  --font-family: #{$font-family}
-
-// mixins
-@mixin btnEffect
-  cursor: pointer
-  transition: 0.3s transform ease
-  &:active
-    transform: scale(0.9)
-
-@mixin bgBlurEffect
-  border: 2px solid #fff
-  border-radius: 40px
-  background: rgba(255, 255, 255, 0.3)
-  backdrop-filter: blur(5px)
-
-@mixin iconSet
-  @include btnEffect
-  position: relative
-  color: $color-label
-  &.active
-    color: $color-primary
-
-@mixin flexCenter($direction: row)
-  display: flex
-  flex-direction: $direction
-  align-items: center
-  justify-content: center
-
-@mixin absoluteCenter
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%)
-
-@mixin circleProgress
-  .outer
-    @include absoluteCenter
-    @include flexCenter
-    width: 160px
-    height: 160px
-    margin-top: $union-gap
-    border-radius: 50%
-    background-color: #e3edf7
-    box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.1),-6px -6px 10px -1px rgba(255, 255, 255, 0.7)
-    .inner
-      @include flexCenter(column)
-      width: 120px
-      height: 120px
-      border-radius: 50%
-      background-color: #e3edf7
-      box-shadow: inset 4px 4px 8px -1px rgba(#000,0.1),inset -4px -4px 8px -1px rgba(#fff,0.7),inset -2px -2px 4px -1px rgba(#fff,0.7),0 12px 10px -10px rgba(#000,0.1)
-      .num,.text
-        text-shadow: 2px 2px 4px rgba(#000,0.1),-2px -2px 4px rgba(#fff,0.7)
-      .num
-        font-size: 1.2rem
-        font-weight: bold
-      .text
-        font-size: 0.8rem
-  svg
-    @include absoluteCenter
-    z-index: 1
-    margin-top: $union-gap
-    circle
-      fill: none
-      stroke: url(#GradientColor)
-      stroke-linecap: round
-      stroke-width: 20px
-      stroke-dasharray: 472px
-      stroke-dashoffset: 472px
-      animation: animate 2s linear forwards
 //reset
 *
   margin: 0
@@ -270,7 +191,7 @@ aside
         width: 100%
         height: 100%
         @include flexCenter(column)
-        @include circleProgress
+        @include circleProgress(var(--dashboard-circle-radius))
     .news
       @include bgBlurEffect
       display: flex
@@ -300,6 +221,6 @@ aside
 
 @keyframes animate
   from
-    stroke-dashoffset: 472px
+    stroke-dashoffset: var(--dashboard-circle-circumference)
   to
-    stroke-dashoffset: 200px
+    stroke-dashoffset: calc(var(--dashboard-circle-circumference) * (1 - var(--dashboard-circle-progress)))

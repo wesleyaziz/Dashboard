@@ -3,55 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./data/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Dashboard</title>
 </head>
 <body>
-    <div class="block">
-        <div class="box">
-            <p class="number">
-                <span class="num">80</span>
-                <span class="sub">%</span>
-            </p>
-            <p class="title">HTML</p>
+    <aside>
+        <i class="icon fa-solid fa-house active"></i>
+        <i class="icon fa-solid fa-user"></i>
+        <i class="icon fa-solid fa-lightbulb"></i>
+        <i class="icon fa-solid fa-message"></i>
+        <i class="icon fa-solid fa-calendar"></i>
+        <i class="icon fa-solid fa-map-location-dot"></i>
+        <i class="icon fa-solid fa-gear"></i>
+        <i class="icon fa-solid fa-sign-out"></i>
+    </aside>
+    <div class="container">
+        <div class="navbar">
+            <div class="wrapper">
+                <h4>Welcome to Digital Wallet, User!</h4>
+                <div class="time">12:00</div>
+            </div>
+            <div class="wrapper">
+                <input type="text" placeholder="Search here" class="search">
+                <div class="bell-container">
+                    <i class="icon fa-solid fa-bell"></i>
+                    <span class="notify"></span>
+                </div>
+                <div id="user"><span class="pulse"></span></div>
+            </div>
         </div>
-        <span class="dots"></span>
-        <svg class="svg">
-            <defs>
-                <linearGradient id="gradientStyle">
-                    <stop offset="0%" stop-color="#565656"></stop>
-                    <stop offset="100%" stop-color="#b7b5b5"></stop>
-                </linearGradient>
-            </defs>
-            <circle class="circle" cx="90" cy="90" r="80"></circle>
-        </svg>
-    </div>
-    <div class="block">
-        <div class="box">
-            <p class="number">
-                <span class="num">100</span>
-                <span class="sub">%</span>
-            </p>
-            <p class="title">CSS</p>
+        <div class="content">
+            <div class="variation">
+                <div class="settleBoxGroup">
+                    <div class="settleBox balance">
+                        <div class="money"><span class="title">Balance</span><span>$</span>100 <i class="icon fa-solid fa-piggy-bank"></i></div>
+                        <hr>
+                        <div class="check">watch the details <i class="fa-solid fa-arrow-right"></i></div>
+                    </div>
+                    <div class="settleBox bill">
+                        <div class="money"><span class="title">Overdraft </span><span>$</span>100 <i class="icon fa-solid fa-money-check-dollar"></i></div>
+                        <hr>
+                        <div class="check">watch the details <i class="icon fa-solid fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                <div class="chartArea">
+                    <div>Savings Trend Chart</div>
+                    <div class="grid"></div>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="analytics">
+                    <h2>Cost Analytics</h2>
+                    <div class="dashboard">
+                        <div class="outer">
+                            <div class="inner">
+                                <div class="num">72%</div>
+                                <div class="text">Total Cost</div>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=160px height="160px">
+                            <defs>
+                                <linearGradient id="GradientColor">
+                                    <stop offset="0%" stop-color="#374e59" />
+                                    <stop offset="100%" stop-color="#64889a" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="80" cy="80" r="70"/>
+                            
+                        </svg>
+                    </div>
+                </div>
+                <div class="news">
+                    <div class="title">How<br>to<br>Save<br>Money?</div>
+                    <button class="btn">Read More <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
         </div>
-        <span class="dots"></span>
-        <svg class="svg">
-            <circle class="circle" cx="90" cy="90" r="80"></circle>
-        </svg>
     </div>
-    <div class="block">
-        <div class="box">
-            <p class="number">
-                <span class="num">75</span>
-                <span class="sub">%</span>
-            </p>
-            <p class="title">JS</p>
-        </div>
-        <span class="dots"></span>
-        <svg class="svg">
-            <circle class="circle" cx="90" cy="90" r="80"></circle>
-        </svg>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="./main.js"></script>
 </body>
 </html>

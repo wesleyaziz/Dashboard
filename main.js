@@ -1,24 +1,80 @@
-const block = document.querySelectorAll('.block')
-window.addEventListener('load',function(){
-  block.forEach(item=>{
-    let numElement = item.querySelector('.num')
-    let num = parseInt(numElement.innerText)
-    let count = 0
-    let time = 2000 / num
-    let circle = item.querySelector('.circle')
-    setInterval(() => {
-      if(count == num){
-        this.clearInterval
-      }else{
-        count++
-        numElement.innerText = count
-      }
-    },time)
-    circle.style.strokeDashoffset = 503 - (503 * (num / 100))
-    let dots = item.querySelector('.dots')
-    dots.style.transform = `rotate(${360 * (num / 100)}deg)`
-    if(num == 100){
-      dots.style.opacity = 0
-    }
+document.addEventListener('DOMContentLoaded',function(){
+
+  // === aside nav ===
+  const asideNav = document.querySelectorAll('aside .icon')
+  asideNav.forEach(icon=>{
+    icon.addEventListener('click',function(){
+      asideNav.forEach(icon=>{
+        if(icon.classList.contains('active')){
+          icon.classList.remove('active')
+        }
+      })
+      this.classList.add('active')
+    })
   })
+
+  // === update time ===
+  function updateTime(){
+    const time = document.querySelector('.navbar .time')
+    const now = new Date()
+    time.innerText = now.toLocaleTimeString('en-US', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit',
+      hour12: false
+    })
+  }
+  updateTime() 
+  setInterval(updateTime,1000)
+
+  // === chart ===  
+  const fontFamily = `"${getComputedStyle(document.documentElement).getPropertyValue("--font-family").trim()}"`
+  const grid = document.querySelector('.grid')
+  const options = {
+    chart: {
+      type: 'line',
+      toolbar:{
+        show: false
+      }
+    },
+    colors: ['#64889a'],
+    series: [{
+      name: 'savings',
+      data: [30,47,35,50,49,60,70,91,125,112,143,162]
+    }],
+    tooltip: {
+      enabled: true,
+      style: {
+        fontSize: '5px',
+        fontFamily: '"Josefin Sans", sans-serif'
+      }
+    },
+    xaxis: {
+      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      labels:{
+        style: {
+          fontSize: '5px',
+          fontFamily: '"Josefin Sans", sans-serif'
+        }
+      }
+    },
+    yaxis: {
+      labels:{
+        style: {
+          fontSize: '5px',
+          fontFamily: '"Josefin Sans", sans-serif'
+        }
+      }
+    },
+    markers: {
+      size: 0,
+    },
+    stroke: {
+      curve: 'smooth',
+    }
+  }
+  
+  const chart = new ApexCharts(grid, options)
+  
+  chart.render()  
 })

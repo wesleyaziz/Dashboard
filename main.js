@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
   // === chart ===  
   const fontFamily = `"${getComputedStyle(document.documentElement).getPropertyValue("--font-family").trim()}"`
-  const grid = document.querySelector('.grid')
+  const grid = document.querySelector('.chart')
   const options = {
     chart: {
       type: 'line',
@@ -71,7 +71,18 @@ document.addEventListener('DOMContentLoaded',function(){
     },
     stroke: {
       curve: 'smooth',
-    }
+    },
+    responsive: [{
+      breakpoint: 320,
+      options: {
+        chart: {
+          height: 'auto'
+        },
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }]
   }
   
   const chart = new ApexCharts(grid, options)

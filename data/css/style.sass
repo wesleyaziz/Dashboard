@@ -1,9 +1,10 @@
-// import
+// Imports
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap')
 @import './mixins'
 @import './variables'
+@import './_RWDstyle'
 
-//reset
+// Reset & base
 *
   margin: 0
   padding: 0
@@ -14,32 +15,56 @@
   list-style-type: none
   text-decoration: none
   user-select: none
-body,html
+
+body, html
   width: 100%
   min-height: 100vh
-  overflow: hidden
+
 body
   position: relative
   @include flexCenter
   padding: 20px
   background: url(../images/bg.jpg) no-repeat center center / cover
 
-//===========================================
+// Layout 
+// Aside nav
 aside
   @include bgBlurEffect
   display: flex
   flex-direction: column
   padding: 20px
   margin-right: 50px
+
   .icon
     @include iconSet
     margin: 20px auto
+    font-size: 1.1rem
 
+  #user
+    position: relative
+    width: 1.4rem
+    height: 1.4rem
+    margin: 20px auto
+    border-radius: 50%
+    background:
+      image: url(../images/user.png)
+      size: 200%
+      position: top center
+    border: none
+    @include btnEffect
+    @include pulse
+
+  @include respond-to('mobile')
+    display: none
+
+// Container
 .container
   @include bgBlurEffect
   width: 80vw
   height: auto
   padding: $container-padding
+
+// Top navbar
 .navbar
   width: 100%
   height: $nav-height
@@ -49,99 +74,112 @@ aside
   margin-top: 10px
   color: $color-label
   gap: $union-gap
+
   .time
     font-size: 1rem
+
   .wrapper
     display: flex
     align-items: center
+    gap: $union-gap
+
     &:first-child
-      justify-content: space-between
       flex: 2
+
+      .secondary-greeting
+        display: none
+
     &:last-child
-      gap: calc( $union-gap / 2 )
       flex: 1
+      justify-content: flex-end
+
     input.search
-      width: clamp( 100px, 100%, 250px )
+      width: clamp(100px, 100%, 250px)
       height: auto
       padding: 5px 20px
       background-color: rgba($color-primary, 0.3)
       backdrop-filter: blur(5px)
       border: none
       border-radius: 20px
-      &:active,&:focus,&:focus-visible
+
+      &:active,
+      &:focus,
+      &:focus-visible
         border: none
         outline: none
+
+    .menubar
+      display: none
     .bell-container
       position: relative
       @include flexCenter
+      @include pulse(#d04442, 20px, 0)
 
-      .icon
-        @include iconSet
-        margin: 20px auto
-        border-radius: 50%
-        background-color: rgba(78, 113, 90, 0.3)
-        backdrop-filter: blur(5px)
-        border: none
-        padding: 7px
-      .notify
-        position: absolute
-        bottom: 20px
-        right: 0
-        width: 10px
-        height: 10px
-        border-radius: 50%
-        background-color: #d04442
-    #user
-      position: relative
-      width: 35px
-      height: 35px
+    .icon
+      @include iconSet
+      margin: 20px auto
       border-radius: 50%
-      background-image: url(../images/user.png)
-      background-size: 200%
-      background-position: top center
+      background-color: rgba(78, 113, 90, 0.3)
+      backdrop-filter: blur(5px)
       border: none
-      @include btnEffect
-      span.pulse
+      padding: 7px
+
+  // Top navbar RWD
+  @include respond-to('desktop')
+    gap: $mobile-union-gap
+
+    .wrapper
+      &:first-child
+        flex: 1
+        h4.primary-greeting
+          display: none
+        h4.secondary-greeting
+          display: block
+
+      .menuWrap
+        display: none
+
+  @include respond-to('mobile')
+
+    .wrapper
+      justify-content: center
+
+      &:first-child h4
+        display: none
+
+      &:last-child
         position: absolute
-        display: inline-block
-        bottom: 0
-        right: 0
-        width: 10px
-        height: 10px
-        border-radius: 50%
-        background: #60f380
-        &::after
-          content: ""
-          position: absolute
-          width: 100%
-          height: 100%
-          border-radius: 50%
-          border: 0.1px solid #fff
-          animation: pulse 3s linear infinite
-          transform-origin: center
-          opacity: 0
-          scale: 0
+        right: $container-padding
+        input.search,
+        .bell-container
+          display: none
+        .menubar
+          display: block !important
+// Content
 .content
   width: 100%
-  height: calc( 100% - $nav-height - $container-padding )
-  display: grid
-  grid-template-columns: 2fr 1fr
+  display: flex
   gap: $union-gap
   color: $color-label
+
   .title
-    font-weight: bold 
+    font-weight: bold
     color: $color-primary
+
   .variation
     width: 100%
     display: grid
     grid-template-rows: auto 1fr
     gap: $union-gap
+    flex: 2
+
     .settleBoxGroup
       display: flex
       align-items: center
       justify-content: space-between
       gap: $union-gap
       width: 100%
+
       .settleBox
         width: 100%
         height: 100px
@@ -151,61 +189,85 @@ aside
         flex-direction: column
         align-items: center
         justify-content: space-evenly
+
+        i
+          margin-right: 5px
+
         .money
+          display: flex
           font-size: 1.2rem
           font-weight: bold
+
           span
             font-size: 0.8rem
             margin-right: 5px
+
         hr
           width: 100%
           border: 1px solid #ddd
+
         .check
           @include flexCenter
           gap: $union-gap
           font-size: 0.8rem
+
           .icon
             font-size: 0.8rem
+
     .chartArea
+      width: 100%
       @include bgBlurEffect
       border-radius: 20px
       @include flexCenter(column)
       padding: 20px 0 0 0
-      .grid
-        width: 550px
-        height: auto
+      overflow: hidden
 
+      .chart
+        width: calc(100% - $container-padding)
+        aspect-ratio: 16/9
+
+  // Sidebar
   .sidebar
+    flex: 1
     position: relative
     display: grid
     grid-template-rows: 1fr 1fr
     gap: $union-gap
+
     .analytics
       @include bgBlurEffect
       padding: $container-padding
+      height: clamp(270px, 270px, 300px)
       display: flex
       flex-direction: column
       align-items: center
+
       .dashboard
         width: 100%
         height: 100%
         @include flexCenter(column)
         @include circleProgress(var(--dashboard-circle-radius))
+
       .title
         font-size: 1.2rem
+
       .subtitle
         font-size: 0.8rem
-        margin-top: calc( $union-gap / 3 )
+        margin-top: calc($union-gap / 3)
+
     .news
       @include bgBlurEffect
+      height: clamp(270px, 270px, 300px)
       display: flex
       flex-direction: column
       justify-content: space-between
       border-radius: 20px
       padding: 15px 20px
       background: url(../images/piggybank.svg) no-repeat bottom right / contain
+
       .title
         font-size: 1.8rem
+
       .btn
         @include btnEffect
         background-color: $color-primary
@@ -215,6 +277,54 @@ aside
         padding: 5px 10px
         font-size: 1rem
 
+  // Content RWD
+  @include respond-to('desktop')
+    flex-direction: column
+
+    .variation
+      flex: 1
+
+    .sidebar
+      grid-template-rows: 1fr
+      grid-template-columns: 1fr 1fr
+
+  @include respond-to('tablet')
+    .sidebar
+      grid-template-rows: 1fr
+      grid-template-columns: 1fr
+
+      .news .title
+        font-size: 2.5rem
+
+    .variation .settleBox .money
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      gap: calc($union-gap / 4)
+
+    .variation .settleBox .check
+      align-items: flex-start
+
+  @include respond-to('mobile')
+    .variation
+      .settleBoxGroup
+        flex-direction: column
+
+      .settleBox .check p
+        display: none
+
+    .sidebar
+      .news .title
+        font-size: 1.8rem
+
+      .dashboard .outer,
+      .dashboard svg
+        margin-top: calc($union-gap * 2)
+
+    .chart
+      aspect-ratio: 4/3
+
+// Animations
 @keyframes pulse
   70%
     scale: 0

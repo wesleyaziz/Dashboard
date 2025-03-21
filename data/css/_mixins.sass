@@ -1,4 +1,4 @@
-// mixins
+// components
 @mixin btnEffect
   cursor: pointer
   transition: 0.3s transform ease
@@ -30,13 +30,34 @@
   left: 50%
   transform: translate(-50%, -50%)
 
+@mixin pulse($bgc: #60f380,$bottom:0,$right:0)
+  span.pulse
+    position: absolute
+    bottom: $bottom
+    right: $right
+    width: 10px
+    height: 10px
+    border-radius: 50%
+    background: $bgc
+    &::after
+      content: ""
+      position: absolute
+      width: 100%
+      height: 100%
+      border-radius: 50%
+      border: 0.1px solid #fff
+      animation: pulse 3s linear infinite
+      transform-origin: center
+      opacity: 0
+      scale: 0
 @mixin circleProgress($radius: 80px)
+  .outer,svg
+    margin-top: $union-gap
   .outer
     @include absoluteCenter
     @include flexCenter
     width: calc( $radius * 2 )
     height: calc( $radius * 2 )
-    margin-top: $union-gap
     border-radius: 50%
     background-color: #e3edf7
     box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.1),-6px -6px 10px -1px rgba(255, 255, 255, 0.7)
@@ -52,14 +73,13 @@
       .num
         font-size: 1.2rem
         font-weight: bold
-      .desc 
+      .desc
         font-size: 0.7rem
   svg
     @include absoluteCenter
     width: calc( $radius * 2 )
     height: calc( $radius * 2 )
     z-index: 1
-    margin-top: $union-gap
     circle
       cx: calc( $radius )
       cy: calc( $radius )

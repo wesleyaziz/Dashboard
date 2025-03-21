@@ -129,8 +129,7 @@ aside
   gap: $union-gap
   color: $color-label
   .title
-    font-weight: bold
-    font-size: 1.5rem
+    font-weight: bold 
     color: $color-primary
   .variation
     width: 100%
@@ -192,6 +191,11 @@ aside
         height: 100%
         @include flexCenter(column)
         @include circleProgress(var(--dashboard-circle-radius))
+      .title
+        font-size: 1.2rem
+      .subtitle
+        font-size: 0.8rem
+        margin-top: calc( $union-gap / 3 )
     .news
       @include bgBlurEffect
       display: flex

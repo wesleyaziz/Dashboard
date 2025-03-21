@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 :root {
+  --font-family: "Josefin Sans", sans-serif;
   --dashboard-circle-radius: 80px;
   --dashboard-circle-circumference: calc( 2 * 3.14159 * var(--dashboard-circle-radius) );
   --dashboard-circle-progress: 0.3;
@@ -193,7 +194,6 @@ aside .icon.active {
 }
 .content .title {
   font-weight: bold;
-  font-size: 1.5rem;
   color: #64889a;
 }
 .content .variation {
@@ -323,13 +323,15 @@ aside .icon.active {
   font-weight: bold;
 }
 .content .sidebar .analytics .dashboard .outer .inner .desc {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 .content .sidebar .analytics .dashboard svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: calc(var(--dashboard-circle-radius) * 2);
+  height: calc(var(--dashboard-circle-radius) * 2);
   z-index: 1;
   margin-top: 20px;
 }
@@ -347,6 +349,13 @@ aside .icon.active {
   transform-origin: center;
   transform: rotate(-90deg);
   transition: stroke-dashoffset 0.3s ease;
+}
+.content .sidebar .analytics .title {
+  font-size: 1.2rem;
+}
+.content .sidebar .analytics .subtitle {
+  font-size: 0.8rem;
+  margin-top: 6.6666666667px;
 }
 .content .sidebar .news {
   border: 2px solid #fff;

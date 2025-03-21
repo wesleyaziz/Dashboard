@@ -52,10 +52,12 @@
       .num
         font-size: 1.2rem
         font-weight: bold
-      .desc
-        font-size: 0.8rem
+      .desc 
+        font-size: 0.7rem
   svg
     @include absoluteCenter
+    width: calc( $radius * 2 )
+    height: calc( $radius * 2 )
     z-index: 1
     margin-top: $union-gap
     circle

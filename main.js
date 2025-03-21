@@ -80,12 +80,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
   // === dashboard circle ===
   const root = document.documentElement
-  const dashboardData= [
-    {
-      percent: 72,
-      
-    }
-  ]
   function getDashboardCircleValue(){
     const radius = getComputedStyle(root).getPropertyValue('--dashboard-circle-radius')
     const circumference = getComputedStyle(root).getPropertyValue('--dashboard-circle-circumference')
@@ -101,8 +95,8 @@ document.addEventListener('DOMContentLoaded',function(){
 
   function updateProgress(percent){
     const progress = percent / 100
-    setDashboardCircleValue(80, progress)
+    setDashboardCircleValue(70, progress)
   }
 
-  updateProgress(72)
+  updateProgress(20)
 })
